@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include<stdlib.h>
+
+int main() {
+	int t;
+	scanf("%d",&t);
+	while(t--) {
+
+		long long n, *a, *b , sum = 0;
+		a=(long long*)malloc(200005*sizeof(long long));//下标过大
+		b=(long long*)malloc(400005*sizeof(long long));
+
+		scanf("%lld", &n);//输入n个数
+
+		for (int i = 0; i < n; i++) {
+			scanf("%lld", &a[i]);
+		}
+
+		for (int i = 0; i < n; i++) {
+			if(a[i]>=i) {
+				b[a[i] - i]++;
+			}
+			else b[(i-a[i])+200000]++;//区分负数 
+		}
+		for (int j = 0; j < 100000; j++) {
+			long long t = b[j];
+
+			if (t > 1) {
+				t = t * (t - 1) / 2;
+				sum += t;
+			}
+		}
+
+		printf("%lld\n", sum);
+	}
+	return 0;
+}
